@@ -1,0 +1,6 @@
+spring:
+  hsf:
+    version: 1.0.0
+    timeout: 3000
+server:
+  port: 8082

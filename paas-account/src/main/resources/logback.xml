@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false" scanPeriod="60 seconds" debug="false">
+    <property name="USER_HOME" value="/Users/jimmy/logs/paas-account/"/>
+    <property name="APP" value="error"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>BaseLog %d{yyyy-MM-dd HH:mm:ss SSS}|%-5level|%-30thread|%logger{36}|%msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${USER_HOME}/${APP}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 被分割的日志的路径-->
+            <fileNamePattern>${USER_HOME}/${APP}-%d{yyyyMMdd, aux}_%d{HH}.log</fileNamePattern>
+            <!-- 分割日志的时间，由fileNamePattern决定单位，此处为小时 -->
+            <MaxHistory>24</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>BaseLog %d{yyyy-MM-dd HH:mm:ss SSS}|%-5level|%-30thread|%logger{36}|%msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="FILE" level="INFO"/>
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
